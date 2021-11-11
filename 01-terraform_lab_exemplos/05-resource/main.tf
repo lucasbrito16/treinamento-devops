@@ -73,15 +73,22 @@ provider "aws" {
   region = "sa-east-1"
 }
 resource "aws_instance" "web" {
-  subnet_id     = "subnet-05d2f48a5e97f0b1a"
-  ami= "ami-054a31f1b3bf90920"
+  subnet_id     = "subnet-032a48150450b3ec5"
+  ami= "ami-0e66f5495b4efdd0f"
+  associate_public_ip_address = true
   instance_type = "t2.micro"
   root_block_device {
     encrypted = true
     volume_size = 8
   }
   tags = {
-    Name = "ec2-zerati-tf"
+    Name = "ec2-lucasbrito-tf"
   }
 }
+
+output "instance_ip_addr" {
+  value = [aws_instance.web.public_dns]
+  description = "Mostra o DNS publico das máquinas."
+}
+
 # /////
